@@ -2,7 +2,8 @@
 module Lita
   module Handlers
     class MakefileExecutor < Handler
-      config :shipit_command, default: 'make -C ./examples deploy'
+      config :shipit_command, default: 'deploy'
+      config :shipit_makefile_path, default: './examples'
       # END:header
 
       # START:routeit
@@ -17,7 +18,7 @@ module Lita
 
       # START:execute
       def ship_app
-	`#{config.shipit_command}`
+	`make -C #{config.shipit_makefile_path} #{config.shipit_command}`
       end
       # END:execute
 
